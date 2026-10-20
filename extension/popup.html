@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<style>
+  :root { color-scheme: dark; }
+  body { width: 280px; margin: 0; padding: 14px; font: 13px/1.4 system-ui, sans-serif;
+         background: #10151d; color: #e6edf3; }
+  h1 { font-size: 14px; margin: 0 0 10px; color: #7ab8ff; }
+  .row { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: #555; flex: none; }
+  .dot.on { background: #3fb950; box-shadow: 0 0 6px #3fb95088; }
+  .dot.err { background: #f85149; }
+  #status { flex: 1; }
+  button { flex: 1; padding: 8px 0; border: 0; border-radius: 8px; cursor: pointer; font-weight: 600; }
+  #start { background: #1f6feb; color: #fff; }
+  #stop { background: #30363d; color: #e6edf3; }
+  button:disabled { opacity: .5; cursor: default; }
+  .stats { margin-top: 10px; padding: 8px 10px; background: #161b22; border-radius: 8px;
+           font-variant-numeric: tabular-nums; }
+  .vol { margin-top: 10px; }
+  .vol input { flex: 1; accent-color: #1f6feb; }
+  .vol .lbl { font-size: 12px; color: #8b949e; flex: none; }
+  #volv { width: 28px; text-align: right; font-variant-numeric: tabular-nums; }
+  .err { color: #f85149; margin-top: 8px; word-break: break-word; }
+  .hint { color: #d29922; margin-top: 8px; word-break: break-word; }
+  .foot { margin-top: 10px; text-align: center; }
+  a { color: #7ab8ff; text-decoration: none; }
+</style>
+</head>
+<body>
+  <h1>IP Camera Audio Bridge</h1>
+  <div class="row"><span id="dot" class="dot"></span><span id="status">Остановлено</span></div>
+  <div class="row">
+    <button id="start">Старт</button>
+    <button id="stop" disabled>Стоп</button>
+  </div>
+  <div class="vol">
+    <span class="lbl">Громкость</span>
+    <input id="vol" type="range" min="0" max="100" value="100">
+    <span id="volv">100</span>
+  </div>
+  <div class="stats">
+    Чанков: <span id="chunks">0</span> · Байт: <span id="bytes">0</span><br>
+    Пакетов: <span id="packets">0</span> → <span id="psec">0.0</span> с звука<br>
+    Буфер: <span id="buf">0.0</span> с · Недогрузки: <span id="und">0</span><br>
+    Звук: <span id="audio">—</span><br>
+    Скорость: <span id="rate">0</span> КБ/с
+  </div>
+  <div id="error" class="err" hidden></div>
+  <div id="hint" class="hint" hidden></div>
+  <div class="foot"><a href="#" id="opts">Настройки камеры</a></div>
+  <script src="popup.js"></script>
+</body>
+</html>
